@@ -18,7 +18,7 @@ Template: [optional] If provided, this will read in and use an existing Excel fi
 
 Style: [optional] Sets default CSS styles for all cells in the document.
 
-** Note: Name and File are optional, but ONE of them is required.
+__Note__: Name and File are optional, but ONE of them is required.
 
 
 ## Classes
@@ -102,48 +102,46 @@ Style: [optional] The CSS styles that should be applied to this cell.
 Alias: [optional] Creates a pointer to the given cell for use within another cell formula. When being referenced in a cell formula, use the @ sign (ex. "SUM( @Start:@End )").
 
 
-
 ## Available Number Formatting Masks
 
-"General"
-"0"
-"0.00"
-"#,##0"
-"#,##0.00"
-"($#,##0_);($#,##0)"
-"($#,##0_);[Red]($#,##0)"
-"($#,##0.00);($#,##0.00)"
-"($#,##0.00_);[Red]($#,##0.00)"
-"0%"
-"0.00%"
-"0.00E+00"
-"# ?/?"
-"# ??/??"
-"(#,##0_);[Red](#,##0)"
-"(#,##0.00_);(#,##0.00)"
-"(#,##0.00_);[Red](#,##0.00)"
-"_(*#,##0_);_(*(#,##0);_(* \"-\"_);_(@_)"
-"_($*#,##0_);_($*(#,##0);_($* \"-\"_);_(@_)"
-"_(*#,##0.00_);_(*(#,##0.00);_(*\"-\"??_);_(@_)"
-"_($*#,##0.00_);_($*(#,##0.00);_($*\"-\"??_);_(@_)"
-"##0.0E+0"
-"@" - This is text format.
-"text" - Alias for "@"
-
+* "General"
+* "0"
+* "0.00"
+* "#,##0"
+* "#,##0.00"
+* "($#,##0_);($#,##0)"
+* "($#,##0_);[Red]($#,##0)"
+* "($#,##0.00);($#,##0.00)"
+* "($#,##0.00_);[Red]($#,##0.00)"
+* "0%"
+* "0.00%"
+* "0.00E+00"
+* "# ?/?"
+* "# ??/??"
+* "(#,##0_);[Red](#,##0)"
+* "(#,##0.00_);(#,##0.00)"
+* "(#,##0.00_);[Red](#,##0.00)"
+* "_(*#,##0_);_(*(#,##0);_(* \"-\"_);_(@_)"
+* "_($*#,##0_);_($*(#,##0);_($* \"-\"_);_(@_)"
+* "_(*#,##0.00_);_(*(#,##0.00);_(*\"-\"??_);_(@_)"
+* "_($*#,##0.00_);_($*(#,##0.00);_($*\"-\"??_);_(@_)"
+* "##0.0E+0"
+* "@" - This is text format.
+* "text" - Alias for "@"
 
 ## Available Date Formatting Masks
 
-"m/d/yy"
-"d-mmm-yy"
-"d-mmm"
-"mmm-yy"
-"h:mm AM/PM"
-"h:mm:ss AM/PM"
-"h:mm"
-"h:mm:ss"
-"m/d/yy h:mm"
-"mm:ss"
-"[h]:mm:ss"
-"mm:ss.0"
+* "m/d/yy"
+* "d-mmm-yy"
+* "d-mmm"
+* "mmm-yy"
+* "h:mm AM/PM"
+* "h:mm:ss AM/PM"
+* "h:mm"
+* "h:mm:ss"
+* "m/d/yy h:mm"
+* "mm:ss"
+* "[h]:mm:ss"
+* "mm:ss.0"
 
 [1]: http://www.bennadel.com
