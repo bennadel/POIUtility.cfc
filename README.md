@@ -3,6 +3,23 @@
 
 by [Ben Nadel][1]
 
+The POIUtility.cfc is a ColdFusion component that helps you read Microsoft Excel files into ColdFusion 
+queries as well as convert ColdFusion queries into multi-sheet Microsoft Excel files.
+
+## Features
+
+* Optional Header Row.
+* Basic CSS style definitions for header, row, and alternating row.
+* Write single or multiple Excel sheets at one time.
+* Read entire workbook into array of sheets or read in single sheet.
+
+## POI ColdFusion Custom Tag Features
+
+* Create Excel documents using ColdFusion custom tags.
+* Write Excel file to file server or to a ColdFusion variable (or both).
+* CSS control at the global, column, row, and cell levels (with proper cascading).
+* Date and Number mask support.
+
 These ColdFusion custom tags allow you to create native Microsoft Excel binary files. They create PRE-2007 compatible files. The following is a list of the currently supported tags and the current attributes.
 
 __NOTE__: All tags in the POI systems require the use of both an OPENING and CLOSING tag. If you leave out a closing tag (or self-closing tag), you will get unexpected results.
