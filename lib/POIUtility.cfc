@@ -1208,18 +1208,40 @@
 								LOCAL.CellType = LOCAL.Cell.GetCellType();
 							
 							
-								// Get teh value of the cell based on the data type. The thing
-								// to worry about here is cell forumlas and cell dates. Formulas 
-								// can be strange and dates are stored as numeric types. For 
-								// this demo, I am not going to worry about that at all. I will 
-								// just grab dates as floats and formulas I will try to grab as
-								// numeric values.
+								// Get the value of the cell based on the data type. The thing
+								// to worry about here is cell formulas and cell dates. Formulas
+								// can be strange and dates are stored as numeric types. For
+								// this demo, I am not going to worry about formulas
+								// (and just try to grab them as numeric values).
+
+								// I will convert the date numerics to M/D/YY format as described here:
+								// http://poi.apache.org/faq.html#faq-N1008D
 								if (LOCAL.CellType EQ LOCAL.Cell.CELL_TYPE_NUMERIC) {
-						 
-									// Get numeric cell data. This could be a standard number, 
-									// could also be a date value. I am going to leave it up to 
-									// the calling program to decide.
+
+									// Get numeric cell data. This could be a standard number,
+									// could also be a date value.
 									LOCAL.CellValue = LOCAL.Cell.GetNumericCellValue();
+
+									// test for numeric that's formatted as a date and if so, convert it back to
+									// a a String that's formatted M/D/YY
+
+									LOCAL.HSSFDateUtil = CreateObject(
+										"java",
+										"org.apache.poi.hssf.usermodel.HSSFDateUtil"
+									);
+
+									if (LOCAL.HSSFDateUtil.isCellDateFormatted(LOCAL.Cell)) {
+										LOCAL.Cal = CreateObject("java", "java.util.Calendar").getInstance();
+
+										// format in form of M/D/YY
+										LOCAL.Cal.setTime(LOCAL.HSSFDateUtil.getJavaDate(LOCAL.CellValue));
+
+										LOCAL.CellValue = LOCAL.Cal.get(LOCAL.Cal.MONTH)+1 & "/" &
+											LOCAL.Cal.get(LOCAL.Cal.DAY_OF_MONTH) & "/" &
+											(CreateObject("java", "java.lang.String").
+												valueOf(LOCAL.Cal.get(LOCAL.Cal.YEAR))).substring(2);
+									}
+
 						 
 								} else if (LOCAL.CellType EQ LOCAL.Cell.CELL_TYPE_STRING){
 						 
