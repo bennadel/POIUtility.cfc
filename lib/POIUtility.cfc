@@ -53,7 +53,7 @@
 
 	<cffunction name="Init" access="public" returntype="POIUtility" output="false"
 		hint="Returns an initialized POI Utility instance.">
-		
+
 		<!--- Return This reference. --->
 		<cfreturn THIS />
 	</cffunction>
@@ -73,17 +73,17 @@
 		
 			// Create a default cell style object.
 			LOCAL.Style = ARGUMENTS.WorkBook.CreateCellStyle();
+
+			// Get indexed colors
+			LOCAL.colorEnum = CreateObject("java", "org.apache.poi.ss.usermodel.IndexedColors");
 			
 			// Check for background color.
 			if (ListFindNoCase( "AQUA,BLACK,BLUE,BLUE_GREY,BRIGHT_GREEN,BROWN,CORAL,CORNFLOWER_BLUE,DARK_BLUE,DARK_GREEN,DARK_RED,DARK_TEAL,DARK_YELLOW,GOLD,GREEN,GREY_25_PERCENT,GREY_40_PERCENT,GREY_50_PERCENT,GREY_80_PERCENT,INDIGO,LAVENDER,LEMON_CHIFFON,LIGHT_BLUE,LIGHT_CORNFLOWER_BLUE,LIGHT_GREEN,LIGHT_ORANGE,LIGHT_TURQUOISE,LIGHT_YELLOW,LIME,MAROON,OLIVE_GREEN,ORANGE,ORCHID,PALE_BLUE,PINK,PLUM,RED,ROSE,ROYAL_BLUE,SEA_GREEN,SKY_BLUE,TAN,TEAL,TURQUOISE,VIOLET,WHITE,YELLOW", ARGUMENTS.CSS[ "background-color" ] )){
 			
 				// Set the background color.
 				LOCAL.Style.SetFillForegroundColor(
-					CreateObject( 
-						"java",
-						"org.apache.poi.hssf.util.HSSFColor$#UCase( ARGUMENTS.CSS[ 'background-color' ] )#"
-						).GetIndex()
-					);
+					LOCAL.colorEnum.valueOf(JavaCast("String", UCase(ARGUMENTS.CSS['background-color']))).getIndex()
+				);
 				
 				
 				// Check for background style.
@@ -193,11 +193,8 @@
 				if (ListFindNoCase( "AQUA,BLACK,BLUE,BLUE_GREY,BRIGHT_GREEN,BROWN,CORAL,CORNFLOWER_BLUE,DARK_BLUE,DARK_GREEN,DARK_RED,DARK_TEAL,DARK_YELLOW,GOLD,GREEN,GREY_25_PERCENT,GREY_40_PERCENT,GREY_50_PERCENT,GREY_80_PERCENT,INDIGO,LAVENDER,LEMON_CHIFFON,LIGHT_BLUE,LIGHT_CORNFLOWER_BLUE,LIGHT_GREEN,LIGHT_ORANGE,LIGHT_TURQUOISE,LIGHT_YELLOW,LIME,MAROON,OLIVE_GREEN,ORANGE,ORCHID,PALE_BLUE,PINK,PLUM,RED,ROSE,ROYAL_BLUE,SEA_GREEN,SKY_BLUE,TAN,TEAL,TURQUOISE,VIOLET,WHITE,YELLOW", ARGUMENTS.CSS[ "border-bottom-color" ] )){
 				
 					LOCAL.Style.SetBottomBorderColor(
-						CreateObject( 
-							"java",
-							"org.apache.poi.hssf.util.HSSFColor$#UCase( ARGUMENTS.CSS[ 'border-bottom-color' ] )#"
-							).GetIndex()
-						);
+						LOCAL.colorEnum.valueOf(JavaCast("String", UCase(ARGUMENTS.CSS['border-bottom-color']))).getIndex()
+					);
 			
 				}				
 			
@@ -287,11 +284,8 @@
 				if (ListFindNoCase( "AQUA,BLACK,BLUE,BLUE_GREY,BRIGHT_GREEN,BROWN,CORAL,CORNFLOWER_BLUE,DARK_BLUE,DARK_GREEN,DARK_RED,DARK_TEAL,DARK_YELLOW,GOLD,GREEN,GREY_25_PERCENT,GREY_40_PERCENT,GREY_50_PERCENT,GREY_80_PERCENT,INDIGO,LAVENDER,LEMON_CHIFFON,LIGHT_BLUE,LIGHT_CORNFLOWER_BLUE,LIGHT_GREEN,LIGHT_ORANGE,LIGHT_TURQUOISE,LIGHT_YELLOW,LIME,MAROON,OLIVE_GREEN,ORANGE,ORCHID,PALE_BLUE,PINK,PLUM,RED,ROSE,ROYAL_BLUE,SEA_GREEN,SKY_BLUE,TAN,TEAL,TURQUOISE,VIOLET,WHITE,YELLOW", ARGUMENTS.CSS[ "border-left-color" ] )){
 				
 					LOCAL.Style.SetLeftBorderColor(
-						CreateObject( 
-							"java",
-							"org.apache.poi.hssf.util.HSSFColor$#UCase( ARGUMENTS.CSS[ 'border-left-color' ] )#"
-							).GetIndex()
-						);
+						LOCAL.colorEnum.valueOf(JavaCast("String", UCase(ARGUMENTS.CSS['border-left-color']))).getIndex()
+					);
 			
 				}				
 			
@@ -381,11 +375,8 @@
 				if (ListFindNoCase( "AQUA,BLACK,BLUE,BLUE_GREY,BRIGHT_GREEN,BROWN,CORAL,CORNFLOWER_BLUE,DARK_BLUE,DARK_GREEN,DARK_RED,DARK_TEAL,DARK_YELLOW,GOLD,GREEN,GREY_25_PERCENT,GREY_40_PERCENT,GREY_50_PERCENT,GREY_80_PERCENT,INDIGO,LAVENDER,LEMON_CHIFFON,LIGHT_BLUE,LIGHT_CORNFLOWER_BLUE,LIGHT_GREEN,LIGHT_ORANGE,LIGHT_TURQUOISE,LIGHT_YELLOW,LIME,MAROON,OLIVE_GREEN,ORANGE,ORCHID,PALE_BLUE,PINK,PLUM,RED,ROSE,ROYAL_BLUE,SEA_GREEN,SKY_BLUE,TAN,TEAL,TURQUOISE,VIOLET,WHITE,YELLOW", ARGUMENTS.CSS[ "border-right-color" ] )){
 				
 					LOCAL.Style.SetRightBorderColor(
-						CreateObject( 
-							"java",
-							"org.apache.poi.hssf.util.HSSFColor$#UCase( ARGUMENTS.CSS[ 'border-right-color' ] )#"
-							).GetIndex()
-						);
+						LOCAL.colorEnum.valueOf(JavaCast("String", UCase(ARGUMENTS.CSS['border-right-color']))).getIndex()
+					);
 			
 				}				
 			
@@ -475,11 +466,8 @@
 				if (ListFindNoCase( "AQUA,BLACK,BLUE,BLUE_GREY,BRIGHT_GREEN,BROWN,CORAL,CORNFLOWER_BLUE,DARK_BLUE,DARK_GREEN,DARK_RED,DARK_TEAL,DARK_YELLOW,GOLD,GREEN,GREY_25_PERCENT,GREY_40_PERCENT,GREY_50_PERCENT,GREY_80_PERCENT,INDIGO,LAVENDER,LEMON_CHIFFON,LIGHT_BLUE,LIGHT_CORNFLOWER_BLUE,LIGHT_GREEN,LIGHT_ORANGE,LIGHT_TURQUOISE,LIGHT_YELLOW,LIME,MAROON,OLIVE_GREEN,ORANGE,ORCHID,PALE_BLUE,PINK,PLUM,RED,ROSE,ROYAL_BLUE,SEA_GREEN,SKY_BLUE,TAN,TEAL,TURQUOISE,VIOLET,WHITE,YELLOW", ARGUMENTS.CSS[ "border-top-color" ] )){
 				
 					LOCAL.Style.SetTopBorderColor(
-						CreateObject( 
-							"java",
-							"org.apache.poi.hssf.util.HSSFColor$#UCase( ARGUMENTS.CSS[ 'border-top-color' ] )#"
-							).GetIndex()
-						);
+						LOCAL.colorEnum.valueOf(JavaCast("String", UCase(ARGUMENTS.CSS['border-top-color']))).getIndex()
+					);
 			
 				}
 			
@@ -493,11 +481,8 @@
 			if (ListFindNoCase( "AQUA,BLACK,BLUE,BLUE_GREY,BRIGHT_GREEN,BROWN,CORAL,CORNFLOWER_BLUE,DARK_BLUE,DARK_GREEN,DARK_RED,DARK_TEAL,DARK_YELLOW,GOLD,GREEN,GREY_25_PERCENT,GREY_40_PERCENT,GREY_50_PERCENT,GREY_80_PERCENT,INDIGO,LAVENDER,LEMON_CHIFFON,LIGHT_BLUE,LIGHT_CORNFLOWER_BLUE,LIGHT_GREEN,LIGHT_ORANGE,LIGHT_TURQUOISE,LIGHT_YELLOW,LIME,MAROON,OLIVE_GREEN,ORANGE,ORCHID,PALE_BLUE,PINK,PLUM,RED,ROSE,ROYAL_BLUE,SEA_GREEN,SKY_BLUE,TAN,TEAL,TURQUOISE,VIOLET,WHITE,YELLOW", ARGUMENTS.CSS[ "color" ] )){
 			
 				LOCAL.Font.SetColor(
-					CreateObject( 
-						"java",
-						"org.apache.poi.hssf.util.HSSFColor$#UCase( ARGUMENTS.CSS[ 'color' ] )#"
-						).GetIndex()
-					);
+					LOCAL.colorEnum.valueOf(JavaCast("String", UCase(ARGUMENTS.CSS['color']))).getIndex()
+				);
 		
 			}
 		
@@ -865,23 +850,20 @@
 		
 			// Define the local scope.
 			var LOCAL = StructNew();
-			
-			
-			// Create a file input stream to the given Excel file.
-			LOCAL.FileInputStream = CreateObject( "java", "java.io.FileInputStream" ).Init( ARGUMENTS.FilePath );
-			
-			// Create the Excel file system object. This object is responsible 
-			// for reading in the given Excel file.
-			LOCAL.ExcelFileSystem = CreateObject( "java", "org.apache.poi.poifs.filesystem.POIFSFileSystem" ).Init( LOCAL.FileInputStream );
 
-								
-			// Get the workbook from the Excel file system.
-			LOCAL.WorkBook = CreateObject(
-				"java",
-				"org.apache.poi.hssf.usermodel.HSSFWorkbook"
-				).Init(
-					LOCAL.ExcelFileSystem
-					);
+			// Get Xcel Workbook
+			if (!fileExists(arguments.filepath)) {
+				throw(message="Workbook does not exist at #arguments.filepath#");
+			}
+
+			// Opening in Office 2003 format, if that fails try opening in OOXML Office 2007+ format
+			try {
+				variables.FileInputStream = CreateObject( "java", "java.io.FileInputStream" ).Init( ARGUMENTS.FilePath );
+				LOCAL.WorkBook = CreateObject("java","org.apache.poi.hssf.usermodel.HSSFWorkbook").Init(variables.FileInputStream);
+			} catch(org.apache.poi.poifs.filesystem.OfficeXmlFileException cfcatch) {
+				variables.FileInputStream = CreateObject( "java", "java.io.FileInputStream" ).Init( ARGUMENTS.FilePath );
+				LOCAL.WorkBook = CreateObject("java","org.apache.poi.xssf.usermodel.XSSFWorkbook").Init(variables.FileInputStream);
+			}
 					
 					
 			// Check to see if we are returning an array of sheets OR just 
@@ -930,7 +912,7 @@
 			// Now that we have crated the Excel file system, 
 			// and read in the sheet data, we can close the 
 			// input file stream so that it is not locked.
-			LOCAL.FileInputStream.Close();
+			variables.FileInputStream.Close();
 						
 			// Return the array of sheets.
 			return( LOCAL.Sheets );
@@ -1210,14 +1192,14 @@
 							
 								// Get teh value of the cell based on the data type. The thing
 								// to worry about here is cell forumlas and cell dates. Formulas 
-								// can be strange and dates are stored as numeric types. For 
-								// this demo, I am not going to worry about that at all. I will 
+								// can be strange and dates are stored as numeric types. For
+								// this demo, I am not going to worry about that at all. I will
 								// just grab dates as floats and formulas I will try to grab as
 								// numeric values.
 								if (LOCAL.CellType EQ LOCAL.Cell.CELL_TYPE_NUMERIC) {
 						 
-									// Get numeric cell data. This could be a standard number, 
-									// could also be a date value. I am going to leave it up to 
+									// Get numeric cell data. This could be a standard number,
+									// could also be a date value. I am going to leave it up to
 									// the calling program to decide.
 									LOCAL.CellValue = LOCAL.Cell.GetNumericCellValue();
 						 
@@ -1348,17 +1330,36 @@
 			default=""
 			hint="Defines the limited CSS available for the alternate non-header rows. This style overwrites parts of the RowCSS."
 			/>
+
+		<cfargument
+			name="OfficeFormat"
+			type="string"
+			required="false"
+			default=""
+			hint="Defines the file format to save the workbook as. Options include 2007,2003 for Office 2007+ and for Office 2003 documents."
+			/>
 		
 		<cfscript>
 			
 			// Set up local scope.
 			var LOCAL = StructNew();
-			
-			// Create Excel workbook.
-			LOCAL.WorkBook = CreateObject( 
-				"java",
-				"org.apache.poi.hssf.usermodel.HSSFWorkbook"
-				).Init();
+
+			// Set the Office Format
+			if (arguments.OfficeFormat IS "" and right(arguments.FilePath, 4) eq 'xlsx') {
+				arguments.OfficeFormat = "2007";
+			} else
+			if (arguments.OfficeFormat IS "" and right(arguments.FilePath, 3) eq 'xls') {
+				arguments.OfficeFormat = "2003";
+			}
+
+			if (arguments.OfficeFormat IS "2007") {
+				// Try opening file as Office 2003 format
+				LOCAL.WorkBook = CreateObject("java","org.apache.poi.xssf.usermodel.XSSFWorkbook").Init();
+			} else if (arguments.OfficeFormat IS "2003") {
+				LOCAL.WorkBook = CreateObject("java","org.apache.poi.hssf.usermodel.HSSFWorkbook").Init();
+			} else {
+				throw("Invalid argument OfficeFormat: #arguments.OfficeFormat#. Valid values are [2007,2003]");
+			}
 				
 			// Check to see if we are dealing with an array of sheets or if we were
 			// passed in a single sheet.
@@ -1435,7 +1436,7 @@
 			// Close the file output stream. This will release any locks on 
 			// the file and finalize the process.
 			LOCAL.FileOutputStream.Close();
-	
+
 			// Return out.
 			return;
 		
@@ -1906,8 +1907,6 @@
 			
 		</cfscript>	
 	</cffunction>
-	
-	
 	
 	<cffunction name="Debug">
 		<cfdump var="#ARGUMENTS#" />
