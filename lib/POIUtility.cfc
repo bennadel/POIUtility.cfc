@@ -858,11 +858,11 @@
 
 			// Opening in Office 2003 format, if that fails try opening in OOXML Office 2007+ format
 			try {
-				variables.FileInputStream = CreateObject( "java", "java.io.FileInputStream" ).Init( ARGUMENTS.FilePath );
-				LOCAL.WorkBook = CreateObject("java","org.apache.poi.hssf.usermodel.HSSFWorkbook").Init(variables.FileInputStream);
+				LOCAL.FileInputStream = CreateObject( "java", "java.io.FileInputStream" ).Init( ARGUMENTS.FilePath );
+				LOCAL.WorkBook = CreateObject("java","org.apache.poi.hssf.usermodel.HSSFWorkbook").Init(LOCAL.FileInputStream);
 			} catch(org.apache.poi.poifs.filesystem.OfficeXmlFileException cfcatch) {
-				variables.FileInputStream = CreateObject( "java", "java.io.FileInputStream" ).Init( ARGUMENTS.FilePath );
-				LOCAL.WorkBook = CreateObject("java","org.apache.poi.xssf.usermodel.XSSFWorkbook").Init(variables.FileInputStream);
+				LOCAL.FileInputStream = CreateObject( "java", "java.io.FileInputStream" ).Init( ARGUMENTS.FilePath );
+				LOCAL.WorkBook = CreateObject("java","org.apache.poi.xssf.usermodel.XSSFWorkbook").Init(LOCAL.FileInputStream);
 			}
 					
 					
@@ -912,7 +912,7 @@
 			// Now that we have crated the Excel file system, 
 			// and read in the sheet data, we can close the 
 			// input file stream so that it is not locked.
-			variables.FileInputStream.Close();
+			LOCAL.FileInputStream.Close();
 						
 			// Return the array of sheets.
 			return( LOCAL.Sheets );
