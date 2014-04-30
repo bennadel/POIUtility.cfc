@@ -1188,20 +1188,27 @@
 							
 								// Get the type of data in this cell.
 								LOCAL.CellType = LOCAL.Cell.GetCellType();
-							
-							
-								// Get teh value of the cell based on the data type. The thing
-								// to worry about here is cell forumlas and cell dates. Formulas 
-								// can be strange and dates are stored as numeric types. For
-								// this demo, I am not going to worry about that at all. I will
-								// just grab dates as floats and formulas I will try to grab as
-								// numeric values.
+
+
+								// Get the value of the cell based on the data type. The thing
+								// to worry about here is cell forumlas and cell dates. Formulas
+								// can be strange and dates are stored as numeric types.
 								if (LOCAL.CellType EQ LOCAL.Cell.CELL_TYPE_NUMERIC) {
-						 
-									// Get numeric cell data. This could be a standard number,
-									// could also be a date value. I am going to leave it up to
-									// the calling program to decide.
-									LOCAL.CellValue = LOCAL.Cell.GetNumericCellValue();
+
+									// Check whether the cell is formatted as a date. If so
+									// get the format object from the cell style using that
+									// to format the java date returned from the cell value
+									// else get the numeric cell value
+									LOCAL.dateUtil = CreateObject("java","org.apache.poi.hssf.usermodel.HSSFDateUtil").init();
+									if (LOCAL.dateUtil.isCellDateFormatted(LOCAL.Cell)) {
+										LOCAL.CellFmt = LOCAL.Cell.getCellStyle().getDataFormatString();
+										LOCAL.CellValue = CreateObject("java","org.apache.poi.ss.format.CellDateFormatter").init(LOCAL.CellFmt).
+												format(LOCAL.dateUtil.getJavaDate(LOCAL.CellValue));
+									} else {
+
+										LOCAL.CellValue = LOCAL.Cell.GetNumericCellValue();
+
+									}
 						 
 								} else if (LOCAL.CellType EQ LOCAL.Cell.CELL_TYPE_STRING){
 						 
