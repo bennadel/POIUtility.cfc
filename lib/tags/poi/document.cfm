@@ -73,7 +73,7 @@
 		<cfif Len( ATTRIBUTES.Template )>
 		
 			<!--- Read in existing workbook. --->
-			<cfset VARIABLES.WorkBook = CreateObject( "java", "org.apache.poi.hssf.usermodel.HSSFWorkbook" ).Init(
+			<cfset VARIABLES.WorkBook = CreateObject( "java", "org.apache.poi.xssf.usermodel.XSSFWorkbook" ).Init(
 				CreateObject( "java", "java.io.FileInputStream" ).Init(
 					JavaCast( "string", ATTRIBUTES.Template )
 					)
@@ -82,7 +82,7 @@
 		<cfelse>
 			
 			<!--- Create a new workbook. --->
-			<cfset VARIABLES.WorkBook = CreateObject( "java", "org.apache.poi.hssf.usermodel.HSSFWorkbook" ).Init() />
+			<cfset VARIABLES.WorkBook = CreateObject( "java", "org.apache.poi.xssf.usermodel.XSSFWorkbook" ).Init() />
 			
 		</cfif>
 	
@@ -90,7 +90,7 @@
 			Create a data formatter utility object (we will need this to 
 			get the formatting index later on when we set the cell styles).
 		--->
-		<cfset VARIABLES.DataFormat = CreateObject( "java", "org.apache.poi.hssf.usermodel.HSSFDataFormat" ) />
+		<cfset VARIABLES.DataFormat = CreateObject( "java", "org.apache.poi.xssf.usermodel.XSSFDataFormat" ) />
 	
 		<!--- Create an index of available number formats. --->
 		<cfset VARIABLES.NumberFormats = {} />
