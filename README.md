@@ -1,4 +1,10 @@
 
+# This Project Is Deprecated
+
+I have not maintained this project in years. As such, I recommend that people **look at the [POIUtility fork](https://github.com/wiggick/POIUtility.cfc)** that is being maintained by [Christopher Wigginton](https://intersuite.blogspot.com/). He has the new hotness.
+
+----
+
 # Kinky Solutions POI ColdFusion Custom Tag
 
 by [Ben Nadel][1]
