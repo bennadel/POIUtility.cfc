@@ -211,11 +211,27 @@
 			<cfif (VARIABLES.RowTag.CellIndex GT ArrayLen( VARIABLES.DocumentTag.ColumnLookup ))>
 			
 				<!--- Use MOD'ing on column lookup. --->
-				<cfset VARIABLES.DocumentTag.CellAliases[ "@#ATTRIBUTES.Alias#" ] = (
-					VARIABLES.DocumentTag.ColumnLookup[ Fix( VARIABLES.RowTag.CellIndex / ArrayLen( VARIABLES.DocumentTag.ColumnLookup ) ) ] & 
-					VARIABLES.DocumentTag.ColumnLookup[ VARIABLES.RowTag.CellIndex MOD ArrayLen( VARIABLES.DocumentTag.ColumnLookup ) ] &
+				<cfif (VARIABLES.RowTag.CellIndex MOD ArrayLen( VARIABLES.DocumentTag.ColumnLookup ) NEQ 0)>
+				
+					<cfset VARIABLES.DocumentTag.CellAliases[ "@#ATTRIBUTES.Alias#" ] = (
+						VARIABLES.DocumentTag.ColumnLookup[ Fix( VARIABLES.RowTag.CellIndex / ArrayLen( VARIABLES.DocumentTag.ColumnLookup ) ) ] & 
+					VARIABLES.DocumentTag.ColumnLookup[ Iif( VARIABLES.RowTag.CellIndex MOD ArrayLen( VARIABLES.DocumentTag.ColumnLookup ) NEQ 0, "VARIABLES.RowTag.CellIndex MOD ArrayLen( VARIABLES.DocumentTag.ColumnLookup )", "ArrayLen( VARIABLES.DocumentTag.ColumnLookup )" ) ] &
 					VARIABLES.SheetTag.RowIndex
 					) />
+				
+				<cfelse>
+					<!--- 
+						Handle the case where the current cell column is a multiple of 26 
+						1) Need to subtract one from the first lookup (Example: for column 52 (AZ), the formula 52/26 returns 2 which would give us B as the lookup. Subtracting 1 gives us A)
+						2) Add 26 to the 2nd lookup (Example: for column 52 (AZ) the formula 52%26 returns 0 (which throws an error) Instead of adding to zero, we just make the second reference always the length of the array (26)
+					--->
+					<cfset VARIABLES.DocumentTag.CellAliases[ "@#ATTRIBUTES.Alias#" ] = (
+					VARIABLES.DocumentTag.ColumnLookup[ Fix( VARIABLES.RowTag.CellIndex / ArrayLen( VARIABLES.DocumentTag.ColumnLookup ) ) - 1 ] & 
+					VARIABLES.DocumentTag.ColumnLookup[ ArrayLen( VARIABLES.DocumentTag.ColumnLookup ) ] &
+					VARIABLES.SheetTag.RowIndex
+					) />
+				
+				</cfif>
 					
 			<cfelse>
 				
